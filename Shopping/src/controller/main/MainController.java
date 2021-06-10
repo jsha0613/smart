@@ -19,7 +19,7 @@ public class MainController extends HttpServlet implements Servlet{
 		// uri = /Shopping/index.html
 		// context = /Shopping
 		
-		if(command.equals("main.sm")) {
+		if(command.equals("/main.sm")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main/home.jsp");
 			dispatcher.forward(request, response);
 		}
