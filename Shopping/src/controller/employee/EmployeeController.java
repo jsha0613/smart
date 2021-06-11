@@ -17,9 +17,15 @@ public class EmployeeController extends HttpServlet implements Servlet{
 		String command = RequestURI.substring(contextPath.length());
 		
 		if(command.equals("/empList.em")) {
+			EmployeeListPage action = new EmployeeListPage();
+			action.empList(request);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("employee/employeeList.jsp");
 			dispatcher.forward(request, response);
 		} else if(command.equals("/empRegest.em")) {
+			EmployeeNumPage action = new EmployeeNumPage();
+			action.getNum(request);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("employee/employeeForm.jsp");
 			dispatcher.forward(request, response);
 		} else if(command.equals("/empJoin.em")) {
