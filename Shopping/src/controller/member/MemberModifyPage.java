@@ -26,7 +26,7 @@ public class MemberModifyPage {
         dto.setMemEmailCk(request.getParameter("memEmailCk"));
         dto.setMemPhone(request.getParameter("memPhone"));
         dto.setPostNumber(request.getParameter("postNumber"));
-
+        dto.setMemId(request.getParameter("memId"));
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Date memBirth = null;
         try {

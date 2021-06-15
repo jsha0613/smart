@@ -41,11 +41,10 @@ public class MemberController extends HttpServlet implements Servlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberInfo.jsp");
 			dispatcher.include(request, response);
 		} else if(command.equals("/memMod.mem")) {
-			response.setCharacterEncoding("utf-8");
 			MemberInfoPage action = new MemberInfoPage();
 			action.memInfo(request);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberModify.jsp");
-			dispatcher.include(request, response);
+			dispatcher.forward(request, response);
 		} else if(command.equals("/memModifyOk.mem")) {
 			response.setCharacterEncoding("utf-8");
 			MemberModifyPage action = new MemberModifyPage();

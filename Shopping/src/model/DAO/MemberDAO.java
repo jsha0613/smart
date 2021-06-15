@@ -52,7 +52,7 @@ public class MemberDAO {
 	}
 	
 	public void memUpdate(MemberDTO dto) {
-		sql = " update member " + " set POST_NUMBER = ? , MEM_ADDRESS = ? , DETAIL_ADD = ? , MEM_EMAIL = ? , MEM_EMAIL_CK = ? , MEM_ACCOUNT = ? , MEM_PHOEN = ? , MEM_BIRTH = ? "
+		sql = " update member " + " set POST_NUMBER = ? , MEM_ADDRESS = ? , DETAIL_ADD = ? , MEM_EMAIL = ? , MEM_EMAIL_CK = ? , MEM_ACCOUNT = ? , MEM_PHONE = ? , MEM_BIRTH = ? "
 				+ " where mem_id = ? ";
 		getConnect();
 		try {
