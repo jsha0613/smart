@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.main.LoginPage;
+
 public class MemberController extends HttpServlet implements Servlet {
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +28,38 @@ public class MemberController extends HttpServlet implements Servlet {
 			MemberJoinPage action = new MemberJoinPage();
 			action.memInsert(request);
 			response.sendRedirect("main.sm");
-			
+		} else if(command.equals("/memList.mem")){
+		    MemberListPage action = new MemberListPage();
+	        action.memList(request);
+			response.setCharacterEncoding("utf-8");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberList.jsp");
+			dispatcher.forward(request, response);
+		} else if(command.equals("/memInfo.mem")) {
+			response.setCharacterEncoding("utf-8");
+			MemberInfoPage action = new MemberInfoPage();
+			action.memInfo(request);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberInfo.jsp");
+			dispatcher.include(request, response);
+		} else if(command.equals("/memMod.mem")) {
+			response.setCharacterEncoding("utf-8");
+			MemberInfoPage action = new MemberInfoPage();
+			action.memInfo(request);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberModify.jsp");
+			dispatcher.include(request, response);
+		} else if(command.equals("/memModifyOk.mem")) {
+			response.setCharacterEncoding("utf-8");
+			MemberModifyPage action = new MemberModifyPage();
+			action.memUpdate(request);
+			response.sendRedirect("memList.mem");
+		} else if(command.equals("/memDel.mem")) {
+			response.setCharacterEncoding("utf-8");
+			MemberDeletePage action = new MemberDeletePage();
+			action.memDel(request);
+			response.sendRedirect("memList.mem");
+		} else if(command.equals("/myPage.mem")) {
+			response.setCharacterEncoding("utf-8");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/memMyPage.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	
