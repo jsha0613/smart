@@ -38,6 +38,10 @@ public void doProcess(HttpServletRequest request, HttpServletResponse response) 
 	   RequestDispatcher dispatcher = request.getRequestDispatcher("goods/goodsModify.jsp");
 	   dispatcher.forward(request, response);
 	   
+   } else if(command.equals("/goodsModify.gd")) {
+	   GoodsUpdatePage action = new GoodsUpdatePage();
+	   action.goodsUpdate(request);
+	   response.sendRedirect("goodsList.gd");
    }
 }
    

@@ -9,6 +9,33 @@ import model.DTO.ProductDTO;
 public class GoodsDAO extends DataBaseInfo{
 	final String COLUMNS = "prod_num, prod_name, prod_price, prod_image, prod_detail, prod_capacity, prud_supplyer, prod_del_fee, recommend, employee_id, ctgr "; 
 	
+	public void goodsUpdate(ProductDTO dto) {
+		sql = " update products"
+				+ " set prod_name = ?, prod_price = ? , prod_detail = ?,"
+				+ " prod_capacity = ?, prud_supplyer = ? , prod_del_fee = ?, recommend = ?"
+				+ " where prod_num = ? ";
+		getConnect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProdName());
+			pstmt.setInt(2, dto.getProdPrice());
+			pstmt.setString(3, dto.getProdDetail());
+			pstmt.setString(4, dto.getProdCapacity());
+			pstmt.setString(5, dto.getProdSupplyer());
+			pstmt.setString(6, dto.getProdDelFee());
+			pstmt.setString(7, dto.getRecommend());
+			pstmt.setString(8, dto.getProdNum());
+			
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개가 수정되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
 	public ProductDTO GoodsOne(String prodNum) {
 		ProductDTO dto = null;
 		sql = " select " + COLUMNS + " from products "
