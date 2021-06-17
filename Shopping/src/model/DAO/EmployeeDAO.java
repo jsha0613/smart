@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.DTO.EmployeeDTO;
+import model.DTO.MemberDTO;
 
 public class EmployeeDAO {
 	final String COLUMNS = " employee_id, emp_userid, emp_pw, emp_name, hire_date, job_id, ph_number, office_number, email, emp_address ";
@@ -33,7 +34,7 @@ public class EmployeeDAO {
 		}
 	}
 	
-	public void empDelete(String empId) {
+	public void empDelete(String empId) { //추가
 		sql = "delete from employees " + " where employee_id = ?";
 		getConnect();
 		try {
@@ -50,7 +51,40 @@ public class EmployeeDAO {
 		
 	}
 	
-	public void empUpdate(EmployeeDTO dto) {
+	public void empDel(String empUserid) { //추가
+		sql = " delete from employees where EMP_USERID = ? ";
+		getConnect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, empUserid);
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개가 삭제되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+		
+	
+	public void pwChange(String empUserid, String empPw) { //추가
+		sql = " update employees "
+				+ " set EMP_PW = ? "
+				+ " where EMP_USERID = ? ";
+		getConnect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, empPw);
+			pstmt.setString(2, empUserid);
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개가 수정되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void empUpdate(EmployeeDTO dto) { //추가
 		sql = " update employees " + " set JOB_ID = ?, PH_NUMBER = ?, OFFICE_NUMBER = ?, EMAIL = ?, EMP_ADDRESS = ? " 
 				+ " where employee_id = ? ";
 		getConnect();
@@ -70,6 +104,33 @@ public class EmployeeDAO {
 		} finally {
 			close();
 		}
+	}
+	
+	public EmployeeDTO empDetail(String empUserid) { //추가
+		EmployeeDTO dto = new EmployeeDTO();
+		sql = " select " + COLUMNS + " from employees where emp_userid = ? ";
+		getConnect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, empUserid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+	            dto.setEmployeeId(rs.getString("EMPLOYEE_ID"));
+	            dto.setEmpUserid(rs.getString("EMP_USERID"));
+	            dto.setEmpName(rs.getString("EMP_NAME"));
+	            dto.setHireDate(rs.getString("HIRE_DATE"));
+	            dto.setJobId(rs.getString("JOB_ID"));
+	            dto.setPhNumber(rs.getString("PH_NUMBER"));
+	            dto.setOfficeNumber(rs.getString("OFFICE_NUMBER"));
+	            dto.setEmail(rs.getString("EMAIL"));
+	            dto.setEmpAddress(rs.getString("EMP_ADDRESS"));
+	         }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return dto;
 	}
 	
 	public EmployeeDTO empInfo(String empId) {
