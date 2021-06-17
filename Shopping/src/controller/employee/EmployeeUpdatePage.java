@@ -26,14 +26,15 @@ public class EmployeeUpdatePage {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		EmployeeDTO dto = new EmployeeDTO();
 		dto.setEmployeeId(request.getParameter("employeeId"));
-        dto.setEmpUserid(authInfo.getUserId());
         dto.setEmpName(request.getParameter("empName"));
-        dto.setHireDate(request.getParameter("hireDate"));
         dto.setJobId(request.getParameter("jobId"));
         dto.setPhNumber(request.getParameter("phNumber"));
         dto.setOfficeNumber(request.getParameter("officeNumber"));
         dto.setEmail(request.getParameter("email"));
         dto.setEmpAddress(request.getParameter("empAddress"));
+        
+        dto.setEmpUserid(authInfo.getUserId());
+        dto.setEmpPw(request.getParameter("empPw"));
         
         if(request.getParameter("empPw").equals(authInfo.getUserPw())) {
         	EmployeeDAO dao = new EmployeeDAO();

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="empSujung.em" method="get" name="frm">
+<form action="empSujungOk.em" method="get" name="frm">
 <input type="hidden" name="employeeId" value="${emp.employeeId }" />
 <table border="1" align="center">
 	<tr><td>사원번호</td>
@@ -18,6 +18,12 @@
 		<td>
 			${dto.empUserid}
 		</td></tr>
+	<tr><td>비밀번호</td>
+      	 <td>
+      	 	<input type="password" name="empPw"/>
+      	 	<span>${pwFail}</span>
+      	 </td>
+      </tr>
 	<tr><td>이름</td>
 		<td>
 			${dto.empName}
@@ -32,11 +38,11 @@
 		</td></tr>
 	<tr><td>연락처</td>
 		<td>
-			<input type="text" name="phNumber" placeholder="010-0000-0000" value="${dto.phNumber}" />
+			<input type="text" name="phNumber"  value="${dto.phNumber}" />
 		</td></tr>
 	<tr><td>사무실번호</td>
 		<td>
-			<input type="text" name="officeNumber" placeholder="02-1234-1234" value="${dto.officeNumber}"/>
+			<input type="text" name="officeNumber" value="${dto.officeNumber}"/>
 		</td></tr>
 	<tr><td>이메일</td>
 		<td>
@@ -47,10 +53,9 @@
 			<input type="text" name="empAddress" value="${dto.empAddress}"/>
 		</td></tr>
 	<tr><td colspan="2" align="center">
-		<input type="submit" value="직원정보 수정"/>
+		<input type="submit" value="수정 완료"/>
 		<input type="button"  value="수정 안함" 
                onclick="javascript:history.back();" />
-		<input type="button" value="직원 삭제" onclick="javascript:location.href='empDelete.em?empId=${dto.employeeId }'"/>
 	</td></tr>
 </table>
 </form>

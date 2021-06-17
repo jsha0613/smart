@@ -88,7 +88,7 @@ public class EmployeeController extends HttpServlet implements Servlet{
 			} else {
 				response.sendRedirect("emOut.em");
 			}
-		} else if(command.equals("/emPwChange.em")) {
+		} else if(command.equals("/empPwChange.em")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("employee/empPwChange.jsp");
 			dispatcher.forward(request, response);
 		} else if(command.equals("/empPwChangeOk.em")) {
@@ -96,7 +96,7 @@ public class EmployeeController extends HttpServlet implements Servlet{
 			String path = action.pwConfirm(request);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
-		} else if(command.equals("/EmpChangePw.em")) {
+		} else if(command.equals("/ChangePw.em")) {
 			EmployeePwChangePage action = new EmployeePwChangePage();
 			int i = action.pwChange(request);
 			if(i == 1) {
